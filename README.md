@@ -1,3 +1,11 @@
+### **Krok 1: Git clone **
+
+```
+git clone https://github.com/djcrashu/laragigs
+cd laragigs
+```
+
+
 ### **Krok 5: Budowa i uruchomienie kontenerów**
 
 Ta komenda zbuduje obraz i uruchomi wszystkie trzy kontenery w tle.
