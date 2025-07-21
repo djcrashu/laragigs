@@ -1,3 +1,6 @@
+To jest fork projektu uruchamiający aplikację w kontenerze.
+
+
 ### **Krok 1: Git clone **
 
 ```
@@ -12,7 +15,7 @@ cp .env.example .env
 ```
 
 
-### **Krok 5: Budowa i uruchomienie kontenerów**
+### **Krok 3: Budowa i uruchomienie kontenerów**
 
 Ta komenda zbuduje obraz i uruchomi wszystkie trzy kontenery w tle.
 
@@ -22,11 +25,11 @@ Ta komenda zbuduje obraz i uruchomi wszystkie trzy kontenery w tle.
 docker compose up -d --build
 ```
 
-Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+
 
 Po tym kroku Twój lokalny katalog laragigs jest zamontowany w kontenerze, ale uprawnienia do zapisu są jeszcze niepoprawne.
 
-### **Krok 6: Finalizacja instalacji (Poprawiona kolejność)**
+### **Krok 4: Finalizacja instalacji (Poprawiona kolejność)**
 
 Poniższe kroki należy wykonać w tej konkretnej kolejności.
 
@@ -38,7 +41,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    docker compose exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
    ```
 
-   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+
 2. **Zainstaluj lub zaktualizuj zależności PHP.** Ta komenda pobierze wszystkie biblioteki potrzebne do działania projektu i zapisze je w nowo utworzonym katalogu vendor.
 
    **Generated bash**
@@ -46,8 +49,6 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    ```
    docker compose exec app composer install
    ```
-
-   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
 
    *Jeśli napotkasz błędy z kompatybilnością PHP, użyj zamiast tego composer update.*
 3. **Wygeneruj klucz aplikacji.** Jest on niezbędny do bezpiecznego działania aplikacji.
@@ -58,7 +59,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    docker compose exec app php artisan key:generate
    ```
 
-   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+
 4. **Uruchom migracje bazy danych.** Ta komenda stworzy wszystkie potrzebne tabele w bazie danych.
 
    **Generated bash**
@@ -67,7 +68,6 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    docker compose exec app php artisan migrate
    ```
 
-   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
 5. **(Opcjonalnie) Wypełnij bazę danych danymi testowymi.**
 
    **Generated bash**
@@ -76,6 +76,4 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    docker compose exec app php artisan db:seed
    ```
 
-   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
 
-### **Gotowe!**
