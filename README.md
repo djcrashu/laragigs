@@ -5,6 +5,12 @@ git clone https://github.com/djcrashu/laragigs
 cd laragigs
 ```
 
+### **Krok 2: Ustawienie zmiennych środowiskowych  **
+
+```
+cp .env.example .env
+```
+
 
 ### **Krok 5: Budowa i uruchomienie kontenerów**
 
@@ -29,7 +35,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    **Generated bash**
 
    ```
-   docker-compose exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+   docker compose exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
    ```
 
    Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
@@ -38,7 +44,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    **Generated bash**
 
    ```
-   docker-compose exec app composer install
+   docker compose exec app composer install
    ```
 
    Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
@@ -49,7 +55,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    **Generated bash**
 
    ```
-   docker-compose exec app php artisan key:generate
+   docker compose exec app php artisan key:generate
    ```
 
    Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
@@ -58,7 +64,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    **Generated bash**
 
    ```
-   docker-compose exec app php artisan migrate
+   docker compose exec app php artisan migrate
    ```
 
    Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
@@ -67,7 +73,7 @@ Poniższe kroki należy wykonać w tej konkretnej kolejności.
    **Generated bash**
 
    ```
-   docker-compose exec app php artisan db:seed
+   docker compose exec app php artisan db:seed
    ```
 
    Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
