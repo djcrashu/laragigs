@@ -1,40 +1,67 @@
-# LaraGigs app
+### **Krok 5: Budowa i uruchomienie kontenerów**
 
-An app for listing Laravel gigs/jobs. This project is from my YouTube "[Laravel From Scratch 2022](https://www.youtube.com/watch?v=MYyJ4PuL4pY)" course.
+Ta komenda zbuduje obraz i uruchomi wszystkie trzy kontenery w tle.
 
-![Alt text](/public/images/screen.png "LaraGigs")
+**Generated bash**
 
-## Usage
-
-### Database Setup
-This app uses MySQL. To use something different, open up config/Database.php and change the default driver.
-
-To use MySQL, make sure you install it, setup a database and then add your db credentials(database, username and password) to the .env.example file and rename it to .env
-
-### Migrations
-To create all the nessesary tables and columns, run the following
 ```
-php artisan migrate
+docker-compose up -d --build
 ```
 
-### Seeding The Database
-To add the dummy listings with a single user, run the following
-```
-php artisan db:seed
-```
+Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
 
-### File Uploading
-When uploading listing files, they go to "storage/app/public". Create a symlink with the following command to make them publicly accessible.
-```
-php artisan storage:link
-```
+Po tym kroku Twój lokalny katalog laragigs jest zamontowany w kontenerze, ale uprawnienia do zapisu są jeszcze niepoprawne.
 
-### Running The App
-Upload the files to your document root, Valet folder or run 
-```
-php artisan serve
-```
+### **Krok 6: Finalizacja instalacji (Poprawiona kolejność)**
 
-## License
+Poniższe kroki należy wykonać w tej konkretnej kolejności.
 
-The LaraGigs app is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Napraw uprawnienia do plików (NAJPIERW!).** To kluczowy krok, który pozwala Laravelowi zapisywać pliki logów i cache. Musi być wykonany jako pierwszy.
+
+   **Generated bash**
+
+   ```
+   docker-compose exec app chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+   ```
+
+   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+2. **Zainstaluj lub zaktualizuj zależności PHP.** Ta komenda pobierze wszystkie biblioteki potrzebne do działania projektu i zapisze je w nowo utworzonym katalogu vendor.
+
+   **Generated bash**
+
+   ```
+   docker-compose exec app composer install
+   ```
+
+   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+
+   *Jeśli napotkasz błędy z kompatybilnością PHP, użyj zamiast tego composer update.*
+3. **Wygeneruj klucz aplikacji.** Jest on niezbędny do bezpiecznego działania aplikacji.
+
+   **Generated bash**
+
+   ```
+   docker-compose exec app php artisan key:generate
+   ```
+
+   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+4. **Uruchom migracje bazy danych.** Ta komenda stworzy wszystkie potrzebne tabele w bazie danych.
+
+   **Generated bash**
+
+   ```
+   docker-compose exec app php artisan migrate
+   ```
+
+   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+5. **(Opcjonalnie) Wypełnij bazę danych danymi testowymi.**
+
+   **Generated bash**
+
+   ```
+   docker-compose exec app php artisan db:seed
+   ```
+
+   Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
+
+### **Gotowe!**
