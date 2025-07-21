@@ -19,7 +19,7 @@ Ta komenda zbuduje obraz i uruchomi wszystkie trzy kontenery w tle.
 **Generated bash**
 
 ```
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 Use code [**with caution**](https://support.google.com/legal/answer/13505487).Bash
